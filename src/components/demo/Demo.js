@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Demo extends React.Component {
   state = {
@@ -9,13 +10,6 @@ class Demo extends React.Component {
     this.setState({
       title: event.target.value
     });
-  };
-
-  handleClick = () => {
-    let { title } = this.state;
-    if (title !== "") {
-      // navigate("demo/notebook", { state: { title: title } });
-    }
   };
 
   render() {
@@ -33,7 +27,18 @@ class Demo extends React.Component {
             onChange={this.handleChange}
           />
         </form>
-        <button onClick={this.handleClick}>Save</button>
+        {title !== "" && (
+          <Link
+            to={{
+              pathname: "/notebook",
+              state: {
+                bookName: title
+              }
+            }}
+          >
+            Save
+          </Link>
+        )}
       </div>
     );
   }

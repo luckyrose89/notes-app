@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Demo from "./components/demo/Demo";
-// import Notebook from "./components/demo/Notebook";
+import Notebook from "./components/demo/Notebook";
 import Dashboard from "./components/dashboard/Dashboard";
 
 class App extends Component {
@@ -20,6 +20,7 @@ class App extends Component {
           </Link>
           <Switch>
             <Route exact path="/demo" component={Demo} />
+            <Route path="/notebook" component={Notebook} />
             <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </div>

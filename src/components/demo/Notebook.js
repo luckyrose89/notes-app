@@ -6,7 +6,7 @@ import ViewFlashCards from "./ViewFlashcards";
 
 class Notebook extends React.Component {
   state = {
-    title: this.props.location.state.title,
+    title: this.props.location.state.bookName,
     visible: 1,
     pageCount: 0,
     flashcards: false,
@@ -43,7 +43,7 @@ class Notebook extends React.Component {
     });
   };
 
-  handleChange = () => {
+  handleChange = event => {
     let notebookCopy = this.state.notebook.slice();
     let id = this.state.pageCount;
     if (["ques", "ans"].includes(event.target.className)) {
