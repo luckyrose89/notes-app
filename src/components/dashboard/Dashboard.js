@@ -1,16 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import CreateBook from "./CreateBook";
+import ViewBook from "./ViewBook";
 
 class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Link to="create">
+        <Link to="/dashboard/createBook">
           <p>Create New Notebook</p>
         </Link>
-        <Link to="view">
+        <Link to="/dashboard/viewBook">
           <p>View Notebooks</p>
         </Link>
+        <Switch>
+          <Route path="/dashboard/createbook" component={CreateBook} />
+          <Route path="/dashboard/viewbook" component={ViewBook} />
+        </Switch>
       </div>
     );
   }

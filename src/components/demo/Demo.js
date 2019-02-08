@@ -30,7 +30,7 @@ class Demo extends React.Component {
         {title !== "" && (
           <Link
             to={{
-              pathname: "/notebook",
+              pathname: "/notedemo",
               state: {
                 bookName: title
               }

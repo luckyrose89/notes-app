@@ -1,6 +1,6 @@
 import React from "react";
 
-class ViewNotebook extends React.Component {
+class ViewBook extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class ViewNotebook extends React.Component {
   }
 }
 
-export default ViewNotebook;
+export default ViewBook;

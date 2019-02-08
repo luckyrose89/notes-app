@@ -1,6 +1,6 @@
 import React from "react";
 
-class CreateNotebook extends React.Component {
+class CreateBook extends React.Component {
   state = {
     title: ""
   };
@@ -17,4 +17,4 @@ class CreateNotebook extends React.Component {
   }
 }
 
-export default CreateNotebook;
+export default CreateBook;
