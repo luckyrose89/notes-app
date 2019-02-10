@@ -1,5 +1,5 @@
 import React from "react";
-// import axios from 'axios';
+import axios from "axios";
 
 class CreateBook extends React.Component {
   state = {
@@ -8,12 +8,23 @@ class CreateBook extends React.Component {
 
   handleNameChange = event => {
     this.setState({
-      title: event.taget.value
+      title: event.target.value
     });
   };
 
   onSubmit = event => {
     event.preventDefault();
+    const obj = {
+      title: this.state.title
+    };
+
+    axios
+      .post("http://localhost:3001/notebook/notebooks/add", obj)
+      .then(res => console.log(res.data));
+
+    this.setState({
+      title: ""
+    });
   };
 
   render() {
