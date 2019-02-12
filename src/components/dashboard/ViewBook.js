@@ -2,6 +2,7 @@
 
 import React from "react";
 import axios from "axios";
+import NotebookList from "./NotebookList";
 
 class ViewBook extends React.Component {
   state = {
@@ -23,15 +24,7 @@ class ViewBook extends React.Component {
 
   displayNotebooks() {
     return this.state.notebooks.map((book, idx) => {
-      return (
-        <li key={idx}>
-          <div>{book.title}</div>
-          <button>Add Page</button>
-          <button>View</button>
-          <button>Edit</button>
-          <button>Delete</button>
-        </li>
-      );
+      return <NotebookList obj={book} key={idx} />;
     });
   }
 
