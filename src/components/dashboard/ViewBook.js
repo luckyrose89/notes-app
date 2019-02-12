@@ -26,6 +26,7 @@ class ViewBook extends React.Component {
       return (
         <li key={idx}>
           <div>{book.title}</div>
+          <button>Add Page</button>
           <button>View</button>
           <button>Edit</button>
           <button>Delete</button>
