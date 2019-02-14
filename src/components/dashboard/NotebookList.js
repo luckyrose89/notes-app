@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class NotebookList extends React.Component {
   render() {
@@ -8,7 +9,9 @@ class NotebookList extends React.Component {
         <button onClick={() => this.props.delete(this.props.obj._id)}>
           Delete
         </button>
-        <button>Edit</button>
+        <Link to={"/edit/" + this.props.obj._id}>
+          <button>Edit</button>
+        </Link>
         <button>Add Page</button>
         <button>View</button>
       </li>
