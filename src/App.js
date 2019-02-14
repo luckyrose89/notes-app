@@ -4,7 +4,10 @@ import Demo from "./components/demo/Demo";
 import Dashboard from "./components/dashboard/Dashboard";
 import Notebook from "./components/demo/Notebook";
 import Header from "./components/Landing/Header";
-import EditNotebook from "./components/dashboard/EditNotebook";
+import CreateBook from "./components/dashboard/Notebook/CreateBook";
+import ViewBooks from "./components/dashboard/Notebook/ViewBooks";
+import EditNotebook from "./components/dashboard/Notebook/EditNotebook";
+import ViewNotebook from "./components/dashboard/Notebook/ViewNotebook";
 
 class App extends Component {
   render() {
@@ -16,6 +19,9 @@ class App extends Component {
             <Route exact path="/demo" component={Demo} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/notedemo" component={Notebook} />
+            <Route path="/createbook" component={CreateBook} />
+            <Route path="/viewbooks" component={ViewBooks} />
+            <Route path="/notebook/:id" component={ViewNotebook} />
             <Route path="/edit/:id" component={EditNotebook} />
           </Switch>
         </div>

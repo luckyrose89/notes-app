@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 import NotebookList from "./NotebookList";
 
-class ViewBook extends React.Component {
+class ViewBooks extends React.Component {
   state = {
     notebooks: []
   };
@@ -45,11 +45,11 @@ class ViewBook extends React.Component {
   render() {
     return (
       <div>
-        <p>This is where you view notebooks</p>
+        <p>These are your notebooks</p>
         <ul>{this.displayNotebooks()}</ul>
       </div>
     );
   }
 }
 
-export default ViewBook;
+export default ViewBooks;
