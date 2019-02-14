@@ -29,6 +29,17 @@ class EditNotebook extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const data = {
+      title: this.state.title
+    };
+    axios
+      .post(
+        "http://localhost:3001/notebook/update/" + this.props.match.params.id,
+        data
+      )
+      .then(res => console.log(res.data));
+
+    this.props.history.push("/dashboard");
   };
 
   render() {
