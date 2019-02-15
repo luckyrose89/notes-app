@@ -21,14 +21,12 @@ class CreateBook extends React.Component {
     };
 
     axios
-      .post("http://localhost:3001/notebook/add", obj)
+      .post("http://localhost:3001/notebook", obj)
       .then(res => console.log(res.data));
 
     this.setState({
       title: ""
     });
-
-    this.props.history.push("/dashboard");
   };
 
   render() {

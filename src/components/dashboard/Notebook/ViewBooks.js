@@ -33,7 +33,7 @@ class ViewBooks extends React.Component {
       notebook => notebook._id !== val
     );
     axios
-      .get("http://localhost:3001/notebook/delete/" + val)
+      .delete("http://localhost:3001/notebook/" + val)
       .then(console.log("Entry Deleted"))
       .catch(err => console.log(err));
 

@@ -10,7 +10,7 @@ class EditNotebook extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:3001/notebook/edit/" + this.props.match.params.id)
+      .get("http://localhost:3001/notebook/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           title: response.data.title
@@ -34,12 +34,10 @@ class EditNotebook extends React.Component {
     };
     axios
       .post(
-        "http://localhost:3001/notebook/update/" + this.props.match.params.id,
+        "http://localhost:3001/notebook/" + this.props.match.params.id,
         data
       )
       .then(res => console.log(res.data));
-
-    this.props.history.push("/dashboard");
   };
 
   render() {
