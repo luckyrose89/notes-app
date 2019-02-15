@@ -7,7 +7,9 @@ import Header from "./components/Landing/Header";
 import CreateBook from "./components/dashboard/Notebook/CreateBook";
 import ViewBooks from "./components/dashboard/Notebook/ViewBooks";
 import EditNotebook from "./components/dashboard/Notebook/EditNotebook";
-import ViewNotebook from "./components/dashboard/Notebook/ViewNotebook";
+import ViewNotebook from "./components/dashboard/Notepage/ViewNotebook";
+import CreatePage from "./components/dashboard/Notepage/CreatePage";
+import EditPage from "./components/dashboard/Notepage/EditPage";
 
 class App extends Component {
   render() {
@@ -17,12 +19,14 @@ class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/demo" component={Demo} />
-            <Route path="/dashboard" component={Dashboard} />
             <Route path="/notedemo" component={Notebook} />
-            <Route path="/createbook" component={CreateBook} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/viewbooks" component={ViewBooks} />
-            <Route path="/notebook/:id" component={ViewNotebook} />
+            <Route path="/createbook" component={CreateBook} />
             <Route path="/edit/:id" component={EditNotebook} />
+            <Route path="/notebook/:id" component={ViewNotebook} />
+            <Route path="/createpage" component={CreatePage} />
+            <Route path="/editpage/:id" component={EditPage} />
           </Switch>
         </div>
       </Router>
