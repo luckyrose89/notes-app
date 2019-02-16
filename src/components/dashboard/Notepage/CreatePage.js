@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import SingleInput from "./SingleInput";
 
 class CreatePage extends React.Component {
   state = {
@@ -66,12 +67,13 @@ class CreatePage extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={this.handleChange}
+          <SingleInput
+            inputType={"text"}
+            title={"Title"}
+            name={"title"}
+            content={title}
+            controlFunc={this.handleChange}
+            placeholder={"Enter Title"}
           />
           {questionAnswer.map((val, idx) => {
             let quesId = `question-${idx}`,
@@ -107,12 +109,13 @@ class CreatePage extends React.Component {
             value="Delete Note"
             onClick={this.handleRemoveNotes}
           />
-          <label htmlFor="summary">Summary</label>
-          <input
-            type="text"
-            name="summary"
-            value={summary}
-            onChange={this.handleChange}
+          <SingleInput
+            inputType={"text"}
+            title={"Summary"}
+            name={"summary"}
+            content={summary}
+            controlFunc={this.handleChange}
+            placeholder={"Enter Summary"}
           />
           <input type="submit" value="Save" />
         </form>

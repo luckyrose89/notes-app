@@ -29,6 +29,11 @@ class ViewNotebook extends React.Component {
       return (
         <div>
           <h1>This is where you see the notepages</h1>
+          <button>Edit Note</button>
+          <button>Delete Note</button>
+          <Link to={"/createpage/" + this.props.match.params.id}>
+            <button>Add Page</button>
+          </Link>
         </div>
       );
     } else {
