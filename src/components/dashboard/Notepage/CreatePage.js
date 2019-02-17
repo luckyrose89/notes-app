@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import SingleInput from "./SingleInput";
+import QuestionAnswer from "./QuestionAnswer";
 
 class CreatePage extends React.Component {
   state = {
@@ -75,34 +76,10 @@ class CreatePage extends React.Component {
             controlFunc={this.handleChange}
             placeholder={"Enter Title"}
           />
-          {questionAnswer.map((val, idx) => {
-            let quesId = `question-${idx}`,
-              ansId = `answer-${idx}`;
-            return (
-              <div key={idx}>
-                <label htmlFor={quesId}> Question </label>
-                <input
-                  type="text"
-                  name={quesId}
-                  data-id={idx}
-                  className="question"
-                  id={quesId}
-                  value={questionAnswer[idx].question}
-                  onChange={this.handleChange}
-                />
-                <label htmlFor={ansId}> Answer </label>
-                <input
-                  type="text"
-                  name={ansId}
-                  className="answer"
-                  data-id={idx}
-                  id={ansId}
-                  value={questionAnswer[idx].answer}
-                  onChange={this.handleChange}
-                />
-              </div>
-            );
-          })}
+          <QuestionAnswer
+            questionAnswer={questionAnswer}
+            controlFunc={this.handleChange}
+          />
           <input type="button" value="Add Note" onClick={this.handleAddNotes} />
           <input
             type="button"
