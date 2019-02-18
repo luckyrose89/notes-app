@@ -1,3 +1,5 @@
+// View First Page of Notebbok
+
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -5,7 +7,8 @@ import NotepageDisplay from "./NotepageDisplay";
 
 class ViewNotebook extends React.Component {
   state = {
-    notes: []
+    notes: [],
+    loading: true
   };
   componentDidMount() {
     axios
@@ -13,7 +16,8 @@ class ViewNotebook extends React.Component {
       .then(response => {
         let notes = response.data.notes;
         this.setState({
-          notes: notes
+          notes: notes,
+          loading: false
         });
       })
       .catch(err => {
@@ -21,7 +25,10 @@ class ViewNotebook extends React.Component {
       });
   }
   render() {
-    let { notes } = this.state;
+    let { notes, loading } = this.state;
+    if (loading === true) {
+      return <div>Loading...</div>;
+    }
     if (notes.length > 0) {
       return (
         <div>

@@ -1,3 +1,5 @@
+// QuestionAnswer Input Component
+
 import React from "react";
 
 const QuestionAnswer = props => {

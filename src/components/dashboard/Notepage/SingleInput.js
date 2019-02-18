@@ -1,3 +1,5 @@
+// Input component for title & Summary
+
 import React from "react";
 
 const SingleInput = props => {
