@@ -1,4 +1,4 @@
-// View First Page of Notebbok
+// View First Page of Notebook
 
 import React from "react";
 import axios from "axios";

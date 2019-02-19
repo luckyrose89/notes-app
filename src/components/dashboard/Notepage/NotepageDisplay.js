@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class NotepageDisplay extends React.Component {
   state = {
@@ -25,7 +26,22 @@ class NotepageDisplay extends React.Component {
     }
   };
 
-  handleDelete = () => {};
+  handleDelete = () => {
+    let idx = this.state.counter - 1;
+    axios
+      .get(
+        "http://localhost:3001/notebook/delete/" +
+          this.props.route +
+          "/" +
+          this.props.notes[idx]._id
+      )
+      .then(response => {
+        console.log(response.data.notes);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   handleIncrease = () => {
     this.setState({

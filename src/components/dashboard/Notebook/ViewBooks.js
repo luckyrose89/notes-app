@@ -2,11 +2,12 @@
 
 import React from "react";
 import axios from "axios";
-import NotebookList from "./NotebookList";
+import { Link } from "react-router-dom";
 
 class ViewBooks extends React.Component {
   state = {
-    notebooks: []
+    notebooks: [],
+    loading: true
   };
 
   componentDidMount() {
@@ -14,7 +15,8 @@ class ViewBooks extends React.Component {
       .get("http://localhost:3001/notebook")
       .then(response => {
         this.setState({
-          notebooks: response.data
+          notebooks: response.data,
+          loading: false
         });
       })
       .catch(err => {
@@ -22,31 +24,36 @@ class ViewBooks extends React.Component {
       });
   }
 
-  displayNotebooks() {
-    return this.state.notebooks.map((book, idx) => {
-      return <NotebookList delete={this.handleDelete} obj={book} key={idx} />;
-    });
-  }
-
   handleDelete = val => {
-    let notebooksCopy = this.state.notebooks.filter(
-      notebook => notebook._id !== val
-    );
+    console.log("I'm supposed to delete, " + val);
     axios
       .delete("http://localhost:3001/notebook/" + val)
-      .then(console.log("Entry Deleted"))
+      .then(response => {
+        console.log(response.data);
+      })
       .catch(err => console.log(err));
-
-    this.setState({
-      notebooks: notebooksCopy
-    });
   };
 
   render() {
+    let { loading, notebooks } = this.state;
+    if (loading === true) {
+      return <div>loading...</div>;
+    }
     return (
       <div>
         <p>These are your notebooks</p>
-        <ul>{this.displayNotebooks()}</ul>
+        {notebooks.map((book, idx) => {
+          return (
+            <div key={idx}>
+              <div>{book.title}</div>
+              <button onClick={() => this.handleDelete(book._id)}>
+                Delete
+              </button>
+              <Link to={"/edit/" + book._id}> Edit </Link>
+              <Link to={"/notebook/" + book._id}> View </Link>
+            </div>
+          );
+        })}
       </div>
     );
   }
