@@ -30,6 +30,7 @@ class ViewBooks extends React.Component {
       .delete("http://localhost:3001/notebook/" + val)
       .then(response => {
         console.log(response.data);
+        this.componentDidMount();
       })
       .catch(err => console.log(err));
   };
