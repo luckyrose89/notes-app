@@ -38,6 +38,8 @@ class EditNotebook extends React.Component {
         data
       )
       .then(res => console.log(res.data));
+
+    this.props.history.push("/dashboard");
   };
 
   render() {
