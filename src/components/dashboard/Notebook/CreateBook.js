@@ -27,6 +27,8 @@ class CreateBook extends React.Component {
     this.setState({
       title: ""
     });
+
+    this.props.history.push("/dashboard");
   };
 
   render() {
