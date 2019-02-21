@@ -26,7 +26,7 @@ class App extends Component {
             <Route path="/edit/:id" component={EditNotebook} />
             <Route path="/notebook/:id" component={ViewNotebook} />
             <Route path="/createpage/:id" component={CreatePage} />
-            <Route path="/editpage/:id" component={EditPage} />
+            <Route path="/editpage/:bookid/:id" component={EditPage} />
           </Switch>
         </div>
       </Router>

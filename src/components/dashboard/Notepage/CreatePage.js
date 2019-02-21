@@ -69,6 +69,8 @@ class CreatePage extends React.Component {
       questionAnswer: [{ question: "", answer: "" }],
       summary: ""
     });
+
+    this.props.history.push("/viewbooks");
   };
 
   render() {

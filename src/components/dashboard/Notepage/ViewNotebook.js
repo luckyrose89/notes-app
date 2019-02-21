@@ -110,7 +110,14 @@ class ViewNotebook extends React.Component {
               })}
             </div>
             <p>{notes[counter - 1].summary}</p>
-            <Link to={"/editpage/" + notes[counter - 1]._id}>
+            <Link
+              to={
+                "/editpage/" +
+                this.props.match.params.id +
+                "/" +
+                notes[counter - 1]._id
+              }
+            >
               <button>Edit Note</button>
             </Link>
             <button onClick={() => this.handleDelete(notes[counter - 1]._id)}>
