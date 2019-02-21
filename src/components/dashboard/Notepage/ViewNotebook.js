@@ -34,7 +34,7 @@ class ViewNotebook extends React.Component {
   };
 
   handleCounterChange = () => {
-    if (this.state.pageIndex <= this.props.notes.length) {
+    if (this.state.pageIndex <= this.state.notes.length) {
       this.setState({
         counter: this.state.pageIndex
       });
@@ -66,7 +66,11 @@ class ViewNotebook extends React.Component {
           val
       )
       .then(response => {
-        this.componentDidMount();
+        this.setState({
+          notes: response.data.notes,
+          counter: 1,
+          pageIndex: 1
+        });
         console.log(response.data.notes);
       })
       .catch(err => {
@@ -112,7 +116,7 @@ class ViewNotebook extends React.Component {
             <button onClick={() => this.handleDelete(notes[counter - 1]._id)}>
               Delete Note
             </button>
-            <Link to={"/createpage/" + this.props.route}>
+            <Link to={"/createpage/" + this.props.match.params.id}>
               <button>Add Page</button>
             </Link>
             <div>
