@@ -10,6 +10,9 @@ const Header = () => {
       <Link to="/demo">
         <p>Demo</p>
       </Link>
+      <Link to="/login">
+        <p>Login</p>
+      </Link>
       <Link to="/dashboard">
         <p>Dashboard</p>
       </Link>

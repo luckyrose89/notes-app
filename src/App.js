@@ -10,6 +10,7 @@ import EditNotebook from "./components/dashboard/Notebook/EditNotebook";
 import ViewNotebook from "./components/dashboard/Notepage/ViewNotebook";
 import CreatePage from "./components/dashboard/Notepage/CreatePage";
 import EditPage from "./components/dashboard/Notepage/EditPage";
+import Login from "./components/login/Login";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/demo" component={Demo} />
             <Route path="/notedemo" component={Notebook} />
+            <Route path="/login" component={Login} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/viewbooks" component={ViewBooks} />
             <Route path="/createbook" component={CreateBook} />
