@@ -64,12 +64,28 @@ class EditPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({
-      title: "",
-      questionAnswer: [{ question: "", answer: "" }],
-      summary: ""
-    });
+    let data = {
+      title: this.state.title,
+      questionAnswer: this.state.questionAnswer,
+      summary: this.state.summary
+    };
+    axios
+      .post(
+        "http://localhost:3001/notebook/edit/" +
+          this.props.match.params.bookid +
+          "/" +
+          this.props.match.params.id,
+        data
+      )
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.props.history.push("/viewbooks");
   };
+
   render() {
     let { title, questionAnswer, summary, loading } = this.state;
     if (loading === true) {
@@ -84,7 +100,6 @@ class EditPage extends React.Component {
             name={"title"}
             content={title}
             controlFunc={this.handleChange}
-            placeholder={"Enter Title"}
           />
           <QuestionAnswer
             questionAnswer={questionAnswer}
@@ -102,7 +117,6 @@ class EditPage extends React.Component {
             name={"summary"}
             content={summary}
             controlFunc={this.handleChange}
-            placeholder={"Enter Summary"}
           />
           <input type="submit" value="Save" />
         </form>
