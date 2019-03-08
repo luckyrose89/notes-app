@@ -34,12 +34,29 @@ class AppContextProvider extends React.Component {
     });
   };
 
-  //   editOneNotebook = (bookId, bookObj) => {
-  //     return notebookAxios
-  //       .put(`/notebook/${bookId}`, bookObj)
-  //       .then(response => {});
-  //   };
-  deleteOneNotebook = () => {};
+  editOneNotebook = (bookId, bookObj) => {
+    return notebookAxios.put(`/notebook/${bookId}`, bookObj).then(response => {
+      this.setState(prevState => {
+        const updatedBooks = prevState.notebooks.map(book => {
+          return book._id === response.data._id ? response.data : book;
+        });
+        return { notebooks: updatedBooks };
+      });
+      return response;
+    });
+  };
+
+  deleteOneNotebook = bookId => {
+    return notebookAxios.delete(`/notebook/${bookId}`).then(response => {
+      this.setState(prevState => {
+        const updatedBooks = prevState.notebooks.filter(book => {
+          return book._id !== bookId;
+        });
+        return { notebook: updatedBooks };
+      });
+      return response;
+    });
+  };
 
   createNotepage = () => {};
   getOneNotepage = () => {};
