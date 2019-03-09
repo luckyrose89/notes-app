@@ -13,6 +13,9 @@ const Header = () => {
       <Link to="/login">
         <p>Login</p>
       </Link>
+      <Link to="/signup">
+        <p>Signup</p>
+      </Link>
       <Link to="/dashboard">
         <p>Dashboard</p>
       </Link>

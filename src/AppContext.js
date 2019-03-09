@@ -3,9 +3,12 @@ import axios from "axios";
 
 const notebookAxios = axios.create();
 
-class AppContextProvider extends React.Component {
+const AppContext = React.createContext();
+
+export class AppContextProvider extends React.Component {
   state = {
-    notebooks: []
+    notebooks: [],
+    loading: true
   };
 
   componentDidMount() {
@@ -14,7 +17,7 @@ class AppContextProvider extends React.Component {
 
   getNotebooks = () => {
     return notebookAxios.get("/notebook").then(response => {
-      this.setState({ notebooks: response.data });
+      this.setState({ notebooks: response.data, loading: false });
       return response;
     });
   };
@@ -64,8 +67,34 @@ class AppContextProvider extends React.Component {
   deleteOneNotepage = () => {};
 
   render() {
-    return <div>This is where we provide a consumer</div>;
+    return (
+      <AppContext.Provider
+        value={{
+          getNotebooks: this.getNotebooks,
+          createNotebook: this.createNotebook,
+          getOneNotebook: this.getOneNotebook,
+          deleteOneNotebook: this.deleteOneNotebook,
+          getOneNotepage: this.getOneNotepage,
+          createNotepage: this.createNotepage,
+          editOneNotepage: this.editOneNotepage,
+          deleteOneNotepage: this.deleteOneNotepage,
+          ...this.state
+        }}
+      >
+        {this.props.children}
+      </AppContext.Provider>
+    );
   }
 }
 
-export default AppContextProvider;
+export const withContext = Component => {
+  return props => {
+    return (
+      <AppContext.Consumer>
+        {globalState => {
+          return <Component {...globalState} {...props} />;
+        }}
+      </AppContext.Consumer>
+    );
+  };
+};
