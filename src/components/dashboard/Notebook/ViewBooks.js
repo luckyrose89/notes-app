@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import { withContext } from "../../../AppContext";
 
 const ViewBooks = props => {
-  // let { loading, notebooks } = this.state;
-  // if (loading === true) {
-  //   return <div>loading...</div>;
-  // }
+  if (props.loading === true) {
+    return <div>loading...</div>;
+  }
   return (
     <div>
       <p>These are your notebooks</p>

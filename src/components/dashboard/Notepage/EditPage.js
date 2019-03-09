@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import SingleInput from "./SingleInput";
-import QuestionAnswer from "./QuestionAnswer";
+import SingleInput from "../../Inputs/SingleInput";
+import QuestionAnswer from "../../Inputs/QuestionAnswer";
 
 class EditPage extends React.Component {
   state = {
