@@ -15,7 +15,9 @@ const ViewBooks = props => {
         return (
           <div key={idx}>
             <div>{book.title}</div>
-            <button onClick={() => this.handleDelete(book._id)}>Delete</button>
+            <button onClick={() => props.deleteOneNotebook(book._id)}>
+              Delete
+            </button>
             <Link to={"/edit/" + book._id}> Edit </Link>
             <Link to={"/notebook/" + book._id}> View </Link>
           </div>

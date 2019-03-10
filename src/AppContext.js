@@ -22,6 +22,7 @@ export class AppContextProvider extends React.Component {
     });
   };
 
+  // bug in createNotebook function
   createNotebook = newNotebook => {
     return notebookAxios.post("/notebook", newNotebook).then(response => {
       this.setState(prevState => {
@@ -61,10 +62,10 @@ export class AppContextProvider extends React.Component {
     });
   };
 
-  createNotepage = () => {};
-  getOneNotepage = () => {};
-  editOneNotepage = () => {};
-  deleteOneNotepage = () => {};
+  // createNotepage = () => {};
+  // getOneNotepage = () => {};
+  // editOneNotepage = () => {};
+  // deleteOneNotepage = () => {};
 
   render() {
     return (

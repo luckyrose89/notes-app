@@ -1,11 +1,12 @@
 // Create Notebook and save to database
 
 import React from "react";
-import axios from "axios";
+import { withContext } from "../../../AppContext";
 
 class CreateBook extends React.Component {
   state = {
-    title: ""
+    title: "",
+    errorMessage: ""
   };
 
   handleNameChange = event => {
@@ -14,21 +15,28 @@ class CreateBook extends React.Component {
     });
   };
 
+  clearInputs = () => {
+    this.setState({
+      title: "",
+      errorMessage: ""
+    });
+  };
+
   onSubmit = event => {
     event.preventDefault();
-    const obj = {
-      title: this.state.title
-    };
-
-    axios
-      .post("http://localhost:3001/notebook", obj)
-      .then(res => console.log(res.data));
-
-    this.setState({
-      title: ""
-    });
-
-    this.props.history.push("/dashboard");
+    var obj = this.state.title;
+    console.log(obj);
+    this.props
+      .createNotebook(obj)
+      .then(response => {
+        this.clearInputs();
+      })
+      .catch(err => {
+        this.setState({
+          errorMessage: err.message
+        });
+      });
+    // this.props.history.push("/dashboard");
   };
 
   render() {
@@ -48,9 +56,10 @@ class CreateBook extends React.Component {
             <input type="submit" value="Save Notebook" />
           </div>
         </form>
+        {this.state.errorMessage}
       </div>
     );
   }
 }
 
-export default CreateBook;
+export default withContext(CreateBook);
