@@ -10,8 +10,9 @@ class CreateBook extends React.Component {
   };
 
   handleNameChange = event => {
+    const { name, value } = event.target;
     this.setState({
-      title: event.target.value
+      [name]: value
     });
   };
 
@@ -48,6 +49,7 @@ class CreateBook extends React.Component {
           <label htmlFor="notebookTitle">Notebook Title:</label>
           <input
             type="text"
+            name="title"
             value={title}
             onChange={this.handleNameChange}
             id="bookTitle"
