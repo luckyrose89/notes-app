@@ -58,6 +58,7 @@ export class AppContextProvider extends React.Component {
         });
         return { notebook: updatedBooks };
       });
+      this.componentDidMount();
       return response;
     });
   };

@@ -23,21 +23,19 @@ class CreateBook extends React.Component {
     });
   };
 
-  onSubmit = event => {
-    event.preventDefault();
-    var obj = this.state.title;
-    console.log(obj);
+  handleSubmit = e => {
+    e.preventDefault();
     this.props
-      .createNotebook(obj)
+      .createNotebook(this.state)
       .then(response => {
         this.clearInputs();
+        this.props.history.push("/dashboard");
       })
-      .catch(err => {
+      .catch(err =>
         this.setState({
-          errorMessage: err.message
-        });
-      });
-    // this.props.history.push("/dashboard");
+          errorMessage: err.response.data.message
+        })
+      );
   };
 
   render() {
@@ -45,7 +43,7 @@ class CreateBook extends React.Component {
     return (
       <div>
         <p>This is where you create a notebook</p>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="notebookTitle">Notebook Title:</label>
           <input
             type="text"

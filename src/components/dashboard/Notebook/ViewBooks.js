@@ -9,7 +9,9 @@ const ViewBooks = props => {
     return (
       <div key={idx}>
         <div>{book.title}</div>
-        <button>Delete</button>
+        <button onClick={() => props.deleteOneNotebook(book._id)}>
+          Delete
+        </button>
         <Link to={"/edit/" + book._id}> Edit </Link>
         <Link to={"/notebook/" + book._id}> View </Link>
       </div>
@@ -17,13 +19,14 @@ const ViewBooks = props => {
   });
   if (props.loading === true) {
     return <div>loading...</div>;
+  } else {
+    return (
+      <div>
+        <p>These are your notebooks</p>
+        {notebooks}
+      </div>
+    );
   }
-  return (
-    <div>
-      <p>These are your notebooks</p>
-      {notebooks}
-    </div>
-  );
 };
 
 export default withContext(ViewBooks);
