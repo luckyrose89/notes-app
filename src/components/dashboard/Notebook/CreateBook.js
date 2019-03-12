@@ -28,12 +28,13 @@ class CreateBook extends React.Component {
     this.props
       .createNotebook(this.state)
       .then(response => {
+        console.log(response);
         this.clearInputs();
         this.props.history.push("/dashboard");
       })
       .catch(err =>
         this.setState({
-          errorMessage: err.response.data.message
+          errorMessage: err.response.data.error
         })
       );
   };
