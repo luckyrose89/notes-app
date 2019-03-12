@@ -40,7 +40,7 @@ class CreateBook extends React.Component {
   };
 
   render() {
-    let { title } = this.state;
+    let { title, errorMessage } = this.state;
     return (
       <div>
         <p>This is where you create a notebook</p>
@@ -57,7 +57,7 @@ class CreateBook extends React.Component {
             <input type="submit" value="Save Notebook" />
           </div>
         </form>
-        {this.state.errorMessage}
+        {errorMessage}
       </div>
     );
   }

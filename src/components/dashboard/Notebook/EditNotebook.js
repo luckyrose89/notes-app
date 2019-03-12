@@ -1,19 +1,18 @@
 import React from "react";
-import axios from "axios";
+import { withContext } from "../../../AppContext";
 
 class EditNotebook extends React.Component {
   state = {
-    title: ""
+    title: "",
+    errorMessage: ""
   };
 
-  input = React.createRef();
-
   componentDidMount() {
-    axios
-      .get("http://localhost:3001/notebook/" + this.props.match.params.id)
+    this.props
+      .getOneNotebook(this.props.match.params.id)
       .then(response => {
         this.setState({
-          title: response.data.title
+          title: response.title
         });
       })
       .catch(err => {
@@ -27,23 +26,31 @@ class EditNotebook extends React.Component {
     });
   };
 
+  clearInputs = () => {
+    this.setState({
+      title: "",
+      errorMessage: ""
+    });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    const data = {
-      title: this.state.title
-    };
-    axios
-      .post(
-        "http://localhost:3001/notebook/" + this.props.match.params.id,
-        data
-      )
-      .then(res => console.log(res.data));
-
-    this.props.history.push("/dashboard");
+    this.props
+      .editOneNotebook(this.props.match.params.id, this.state)
+      .then(response => {
+        console.log(response);
+        this.clearInputs();
+        this.props.history.push("/dashboard");
+      })
+      .catch(err => {
+        this.setState({
+          errorMessage: err.response.data.error
+        });
+      });
   };
 
   render() {
-    let { title } = this.state;
+    let { title, errorMessage } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -55,9 +62,10 @@ class EditNotebook extends React.Component {
             <input type="submit" value="Update" />
           </div>
         </form>
+        {errorMessage}
       </div>
     );
   }
 }
 
-export default EditNotebook;
+export default withContext(EditNotebook);

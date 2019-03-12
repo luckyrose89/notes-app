@@ -75,6 +75,7 @@ export class AppContextProvider extends React.Component {
           getNotebooks: this.getNotebooks,
           createNotebook: this.createNotebook,
           getOneNotebook: this.getOneNotebook,
+          editOneNotebook: this.editOneNotebook,
           deleteOneNotebook: this.deleteOneNotebook,
           getOneNotepage: this.getOneNotepage,
           createNotepage: this.createNotepage,
