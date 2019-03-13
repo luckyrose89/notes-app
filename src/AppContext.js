@@ -56,14 +56,27 @@ export class AppContextProvider extends React.Component {
         const updatedBooks = prevState.notebooks.filter(book => {
           return book._id !== bookId;
         });
-        return { notebook: updatedBooks };
+        return { notebooks: updatedBooks };
       });
       this.componentDidMount();
       return response;
     });
   };
 
-  // createNotepage = () => {};
+  createNotepage = (bookId, notepage) => {
+    return notebookAxios.post(`/add/${bookId}`, notepage).then(response => {
+      this.setState(prevState => {
+        const updatedNotebooks = prevState.notebooks.map(book => {
+          if (book._id === bookId) {
+            return book.notes.push(response.data);
+          }
+        });
+        return { notebooks: updatedNotebooks };
+      });
+      this.componentDidMount();
+      return response;
+    });
+  };
   // getOneNotepage = () => {};
   // editOneNotepage = () => {};
   // deleteOneNotepage = () => {};
