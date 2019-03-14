@@ -50,6 +50,7 @@ export class AppContextProvider extends React.Component {
     });
   };
 
+  // test delete feature after change in return response
   deleteOneNotebook = bookId => {
     return notebookAxios.delete(`/notebook/${bookId}`).then(response => {
       this.setState(prevState => {
@@ -58,28 +59,39 @@ export class AppContextProvider extends React.Component {
         });
         return { notebooks: updatedBooks };
       });
-      this.componentDidMount();
+      // this.componentDidMount();
       return response;
     });
   };
 
   createNotepage = (bookId, notepage) => {
-    return notebookAxios.post(`/add/${bookId}`, notepage).then(response => {
-      this.setState(prevState => {
-        const updatedNotebooks = prevState.notebooks.map(book => {
-          if (book._id === bookId) {
-            return book.notes.push(response.data);
-          }
+    return notebookAxios
+      .post(`/notebook/add/${bookId}`, notepage)
+      .then(response => {
+        this.setState(prevState => {
+          const updatedNotebooks = prevState.notebooks.map(book => {
+            if (book._id === bookId) {
+              return book.notes.push(response.data);
+            }
+          });
+          return { notebooks: updatedNotebooks };
         });
-        return { notebooks: updatedNotebooks };
+        this.componentDidMount();
+        return response;
       });
-      this.componentDidMount();
-      return response;
-    });
   };
-  // getOneNotepage = () => {};
-  // editOneNotepage = () => {};
-  // deleteOneNotepage = () => {};
+
+  getOneNotepage = (bookId, noteId) => {
+    return notebookAxios
+      .get(`/notebook/${bookId}/notes/${noteId}`)
+      .then(response => {
+        return response.data;
+      });
+  };
+
+  editOneNotepage = (bookId, noteId) => {};
+
+  deleteOneNotepage = (bookId, noteId) => {};
 
   render() {
     return (
