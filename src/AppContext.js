@@ -76,7 +76,6 @@ export class AppContextProvider extends React.Component {
           });
           return { notebooks: updatedNotebooks };
         });
-        this.componentDidMount();
         return response;
       });
   };
@@ -89,7 +88,27 @@ export class AppContextProvider extends React.Component {
       });
   };
 
-  editOneNotepage = (bookId, noteId) => {};
+  editOneNotepage = (bookId, noteId, notepage) => {
+    return notebookAxios
+      .put(`/notebook/${bookId}/notes/${noteId}`, notepage)
+      .then(response => {
+        this.setState(prevState => {
+          const updatedNotebooks = prevState.notebooks.map(book => {
+            if (book._id === bookId) {
+              book.notes.map(note => {
+                if (note._id === noteId) {
+                  (note.title = response.data.title),
+                    (note.questionAnswer = response.data.questionAnswer),
+                    (note.summary = response.data.summary);
+                }
+              });
+            }
+          });
+          return { notebooks: updatedNotebooks };
+        });
+        return response;
+      });
+  };
 
   deleteOneNotepage = (bookId, noteId) => {};
 
