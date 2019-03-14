@@ -96,10 +96,12 @@ export class AppContextProvider extends React.Component {
           const updatedNotebooks = prevState.notebooks.map(book => {
             if (book._id === bookId) {
               book.notes.map(note => {
-                if (note._id === noteId) {
-                  (note.title = response.data.title),
+                if (note._id === response._id) {
+                  return (
+                    (note.title = response.data.title),
                     (note.questionAnswer = response.data.questionAnswer),
-                    (note.summary = response.data.summary);
+                    (note.summary = response.data.summary)
+                  );
                 }
               });
             }
@@ -110,7 +112,23 @@ export class AppContextProvider extends React.Component {
       });
   };
 
-  deleteOneNotepage = (bookId, noteId) => {};
+  deleteOneNotepage = (bookId, noteId) => {
+    notebookAxios
+      .delete(`/notebook/${bookId}/notes/${noteId}`)
+      .then(response => {
+        this.setState(prevState => {
+          const updatedNotebooks = prevState.notebooks.map(book => {
+            if (book._id === bookId) {
+              book.notes.filter(note => {
+                return note._id !== response._id;
+              });
+            }
+          });
+          return { notebooks: updatedNotebooks };
+        });
+        return response;
+      });
+  };
 
   render() {
     return (
