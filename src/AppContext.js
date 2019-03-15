@@ -64,6 +64,7 @@ export class AppContextProvider extends React.Component {
     });
   };
 
+  // Error in createPage. component not refreshing. Page needs manual refresh
   createNotepage = (bookId, notepage) => {
     return notebookAxios
       .post(`/notebook/add/${bookId}`, notepage)
@@ -76,7 +77,6 @@ export class AppContextProvider extends React.Component {
           });
           return { notebooks: updatedNotebooks };
         });
-        console.log(response);
         return response;
       });
   };
@@ -113,6 +113,7 @@ export class AppContextProvider extends React.Component {
       });
   };
 
+  //Error -- 'then' is undefined
   deleteOneNotepage = (bookId, noteId) => {
     notebookAxios
       .delete(`/notebook/${bookId}/notes/${noteId}`)

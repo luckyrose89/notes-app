@@ -14,10 +14,10 @@ class ViewPage extends React.Component {
   };
 
   componentDidMount() {
-    axios
-      .get("http://localhost:3001/notebook/" + this.props.match.params.id)
+    this.props
+      .getOneNotebook(this.props.match.params.id)
       .then(response => {
-        let notes = response.data.notes;
+        let notes = response.notes;
         this.setState({
           notes: notes,
           loading: false
