@@ -3,6 +3,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { withContext } from "../../../AppContext";
 
 class ViewPage extends React.Component {
   state = {
@@ -58,13 +59,8 @@ class ViewPage extends React.Component {
   };
 
   handleDelete = val => {
-    axios
-      .get(
-        "http://localhost:3001/notebook/delete/" +
-          this.props.match.params.id +
-          "/" +
-          val
-      )
+    this.props
+      .deleteOneNotepage(this.props.match.params.id, val)
       .then(response => {
         this.setState({
           notes: response.data.notes,
@@ -150,4 +146,4 @@ class ViewPage extends React.Component {
   }
 }
 
-export default ViewPage;
+export default withContext(ViewPage);
