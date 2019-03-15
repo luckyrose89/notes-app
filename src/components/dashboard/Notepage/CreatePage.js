@@ -1,15 +1,16 @@
 // Create Notebook Page Component
 
 import React from "react";
-import axios from "axios";
 import SingleInput from "../../Inputs/SingleInput";
 import QuestionAnswer from "../../Inputs/QuestionAnswer";
+import { withContext } from "../../../AppContext";
 
 class CreatePage extends React.Component {
   state = {
     title: "",
     questionAnswer: [{ question: "", answer: "" }],
-    summary: ""
+    summary: "",
+    errorMessage: ""
   };
 
   handleChange = event => {
@@ -45,36 +46,31 @@ class CreatePage extends React.Component {
     }
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    let data = {
-      title: this.state.title,
-      questionAnswer: this.state.questionAnswer,
-      summary: this.state.summary
-    };
-    axios
-      .post(
-        "http://localhost:3001/notebook/addPage/" + this.props.match.params.id,
-        data
-      )
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
+  clearInputs = () => {
     this.setState({
       title: "",
-      questionAnswer: [{ question: "", answer: "" }],
-      summary: ""
+      summary: "",
+      questionAnswer: [{ question: "", answer: "" }]
     });
+  };
 
-    this.props.history.push("/viewbooks");
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props
+      .createNotepage(this.props.match.params.id, this.state)
+      .then(response => {
+        this.clearInputs();
+        this.props.history.push("/viewbooks");
+      })
+      .catch(err => {
+        this.setState({
+          errorMessage: err.response.data.error
+        });
+      });
   };
 
   render() {
-    let { title, questionAnswer, summary } = this.state;
+    let { title, questionAnswer, summary, errorMessage } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -106,9 +102,10 @@ class CreatePage extends React.Component {
           />
           <input type="submit" value="Save" />
         </form>
+        {errorMessage}
       </div>
     );
   }
 }
 
-export default CreatePage;
+export default withContext(CreatePage);

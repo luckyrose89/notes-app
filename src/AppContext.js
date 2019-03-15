@@ -13,16 +13,18 @@ export class AppContextProvider extends React.Component {
 
   componentDidMount() {
     this.getNotebooks();
+    this.setState({
+      loading: false
+    });
   }
 
   getNotebooks = () => {
     return notebookAxios.get("/notebook").then(response => {
-      this.setState({ notebooks: response.data, loading: false });
+      this.setState({ notebooks: response.data });
       return response;
     });
   };
 
-  // bug in createNotebook function
   createNotebook = newNotebook => {
     return notebookAxios.post("/notebook", newNotebook).then(response => {
       this.setState(prevState => {
@@ -50,7 +52,6 @@ export class AppContextProvider extends React.Component {
     });
   };
 
-  // test delete feature after change in return response
   deleteOneNotebook = bookId => {
     return notebookAxios.delete(`/notebook/${bookId}`).then(response => {
       this.setState(prevState => {
@@ -59,7 +60,6 @@ export class AppContextProvider extends React.Component {
         });
         return { notebooks: updatedBooks };
       });
-      // this.componentDidMount();
       return response;
     });
   };
@@ -76,6 +76,7 @@ export class AppContextProvider extends React.Component {
           });
           return { notebooks: updatedNotebooks };
         });
+        console.log(response);
         return response;
       });
   };
