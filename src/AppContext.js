@@ -7,15 +7,11 @@ const AppContext = React.createContext();
 
 export class AppContextProvider extends React.Component {
   state = {
-    notebooks: [],
-    loading: true
+    notebooks: []
   };
 
   componentDidMount() {
     this.getNotebooks();
-    this.setState({
-      loading: false
-    });
   }
 
   getNotebooks = () => {
@@ -72,11 +68,14 @@ export class AppContextProvider extends React.Component {
         this.setState(prevState => {
           const updatedNotebooks = prevState.notebooks.map(book => {
             if (book._id === bookId) {
-              return book.notes.push(response.data);
+              return book.notes.push(
+                response.data.notes[response.data.notes.length - 1]
+              );
             }
           });
           return { notebooks: updatedNotebooks };
         });
+        console.log(this.state.notebooks);
         return response;
       });
   };
@@ -118,11 +117,12 @@ export class AppContextProvider extends React.Component {
     notebookAxios
       .delete(`/notebook/${bookId}/notes/${noteId}`)
       .then(response => {
+        console.log(response);
         this.setState(prevState => {
           const updatedNotebooks = prevState.notebooks.map(book => {
             if (book._id === bookId) {
               book.notes.filter(note => {
-                return note._id !== response._id;
+                return note._id !== noteId;
               });
             }
           });

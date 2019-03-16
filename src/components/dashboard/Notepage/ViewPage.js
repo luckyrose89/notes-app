@@ -1,7 +1,6 @@
 // View First Page of Notebook
 
 import React from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { withContext } from "../../../AppContext";
 
