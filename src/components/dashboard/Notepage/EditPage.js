@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { withContext } from "../../../AppContext";
 import SingleInput from "../../Inputs/SingleInput";
 import QuestionAnswer from "../../Inputs/QuestionAnswer";
 
@@ -12,18 +12,16 @@ class EditPage extends React.Component {
   };
 
   componentDidMount() {
-    axios
-      .get(
-        "http://localhost:3001/notebook/edit/" +
-          this.props.match.params.bookid +
-          "/" +
-          this.props.match.params.id
+    this.props
+      .getOneNotepage(
+        this.props.match.params.bookid,
+        this.props.match.params.id
       )
       .then(response => {
         this.setState({
-          title: response.data.title,
-          questionAnswer: response.data.questionAnswer,
-          summary: response.data.summary,
+          title: response.title,
+          questionAnswer: response.questionAnswer,
+          summary: response.summary,
           loading: false
         });
       });
@@ -64,18 +62,11 @@ class EditPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let data = {
-      title: this.state.title,
-      questionAnswer: this.state.questionAnswer,
-      summary: this.state.summary
-    };
-    axios
-      .post(
-        "http://localhost:3001/notebook/edit/" +
-          this.props.match.params.bookid +
-          "/" +
-          this.props.match.params.id,
-        data
+    this.props
+      .editOneNotepage(
+        this.props.match.params.bookid,
+        this.props.match.params.id,
+        this.state
       )
       .then(response => {
         console.log(response.data);
@@ -125,4 +116,4 @@ class EditPage extends React.Component {
   }
 }
 
-export default EditPage;
+export default withContext(EditPage);
