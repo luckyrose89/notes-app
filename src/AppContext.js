@@ -60,22 +60,10 @@ export class AppContextProvider extends React.Component {
     });
   };
 
-  // Error in createPage. component not refreshing. Page needs manual refresh
   createNotepage = (bookId, notepage) => {
     return notebookAxios
       .post(`/notebook/add/${bookId}`, notepage)
       .then(response => {
-        this.setState(prevState => {
-          const updatedNotebooks = prevState.notebooks.map(book => {
-            if (book._id === bookId) {
-              return book.notes.push(
-                response.data.notes[response.data.notes.length - 1]
-              );
-            }
-          });
-          return { notebooks: updatedNotebooks };
-        });
-        console.log(this.state.notebooks);
         return response;
       });
   };
@@ -84,7 +72,7 @@ export class AppContextProvider extends React.Component {
     return notebookAxios
       .get(`/notebook/${bookId}/notes/${noteId}`)
       .then(response => {
-        return response.data;
+        return response;
       });
   };
 
@@ -92,22 +80,6 @@ export class AppContextProvider extends React.Component {
     return notebookAxios
       .put(`/notebook/${bookId}/notes/${noteId}`, notepage)
       .then(response => {
-        this.setState(prevState => {
-          const updatedNotebooks = prevState.notebooks.map(book => {
-            if (book._id === bookId) {
-              book.notes.map(note => {
-                if (note._id === response._id) {
-                  return (
-                    (note.title = response.data.title),
-                    (note.questionAnswer = response.data.questionAnswer),
-                    (note.summary = response.data.summary)
-                  );
-                }
-              });
-            }
-          });
-          return { notebooks: updatedNotebooks };
-        });
         return response;
       });
   };

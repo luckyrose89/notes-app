@@ -19,9 +19,9 @@ class EditPage extends React.Component {
       )
       .then(response => {
         this.setState({
-          title: response.title,
-          questionAnswer: response.questionAnswer,
-          summary: response.summary,
+          title: response.data.title,
+          questionAnswer: response.data.questionAnswer,
+          summary: response.data.summary,
           loading: false
         });
       });
