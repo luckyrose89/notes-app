@@ -84,22 +84,10 @@ export class AppContextProvider extends React.Component {
       });
   };
 
-  //Error -- 'then' is undefined
   deleteOneNotepage = (bookId, noteId) => {
-    notebookAxios
+    return notebookAxios
       .delete(`/notebook/${bookId}/notes/${noteId}`)
       .then(response => {
-        console.log(response);
-        this.setState(prevState => {
-          const updatedNotebooks = prevState.notebooks.map(book => {
-            if (book._id === bookId) {
-              book.notes.filter(note => {
-                return note._id !== noteId;
-              });
-            }
-          });
-          return { notebooks: updatedNotebooks };
-        });
         return response;
       });
   };

@@ -16,9 +16,8 @@ class ViewPage extends React.Component {
     this.props
       .getOneNotebook(this.props.match.params.id)
       .then(response => {
-        let notes = response.notes;
         this.setState({
-          notes: notes,
+          notes: response.notes,
           loading: false
         });
       })
@@ -66,7 +65,6 @@ class ViewPage extends React.Component {
           counter: 1,
           pageIndex: 1
         });
-        console.log(response.data.notes);
       })
       .catch(err => {
         console.log(err);
